@@ -34,31 +34,29 @@ def preview(request):
         return render(request, 'preview.html')
 
 def full(request):
-    #if request.method == 'GET':
-    if request.is_ajax():
-        if 'url' in request.GET and 'type' in request.GET:
-            url = request.GET['url']
-            type_ = request.GET['type']
+    if request.method == 'GET' and 'url' in request.GET and request.GET['url']:
+        url = request.GET['url']
+        type_ = request.GET['type']
+        tag = request.GET['tag']
+        class_ = request.GET['class']
+        id_ = request.GET['id']
+        # Ajax
+        if request.is_ajax():
             if type_ == 'ra':
-                content = get_full(url, onlycontent=True)
+                content = get_full(url, type_='ra', onlycontent=True)
                 return HttpResponse(content)
 
             elif type_ == 'bs':
-                pass
-
+                content = get_full(url, type_='bs', onlycontent=True, class_=class_, tag=tag, id_=id_)
+                return HttpResponse(content)
+        # Render rss
         else:
-            return HttpResponse('Error 42')
-    if not request.is_ajax() and request.method == 'GET':
-        if 'url' in request.GET and 'type' in request.GET:
-            url = request.GET['url']
-            type_ = request.GET['type']
-
             if type_ == 'ra':
-                content = get_full(url)
+                content = get_full(url, type_='ra')
                 return HttpResponse(content, content_type="text/xml")
             elif type_ == 'bs':
-                pass
-
+                content = get_full(url, type_='bs', class_=class_, tag=tag, id_=id_)
+                return HttpResponse(content, content_type="text/xml")
 
     return render(request, 'full.html', {})
 
