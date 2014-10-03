@@ -146,7 +146,7 @@ function get_full(){
 <p>提供两个全文提取器：</p>
 <p><ul>
 <li>Readability：默认使用的全文提取器，大部分情况下能够很好的过滤无用标签得到干净的正文</li>
-<li>BeautifulSoup：通过三个参数(tag, class, id)过滤，需要一点点HTML知识。</li>
+<li>BeautifulSoup：通过三个参数(tag, class, id)过滤，不会进一步清洗HTML。需要一点点HTML知识。</li>
 </ul></p>
 <p>
 <p>以 <a href="http://www.ifanr.com/457493">ifanr</a>  为例，通过浏览器F12开发者工具，它的正文所在的区块的tag=div, class=entry-content, id=entry-content， 输入任意一个或多个参数都行。但是要注意此例中在tag处输入div显然不能过滤得到正文，因为网页远远不止一个div，当出现参数匹配多个内容的情况下返回第一个匹配的内容。</p>
