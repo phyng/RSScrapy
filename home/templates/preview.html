@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block container %}
+
+<h1 class="page-header">RSS 预览工具</h1>
+<h2 class="sub-header">输入 RSS 地址</h2>
+<div><p>
+<form class="form-inline" role="search" action="{% url 'home:preview' %}" method="post">
+ {% csrf_token %}
+    <div class="form-group">
+      <input type="text" class="form-control" placeholder="输入 RSS 地址" name="rss">
+    </div>
+    <button type="submit" class="btn btn-default">预览</button>
+</form>
+</p></div>
+<!--表格 -->
+<div><p>这个工具可以用来验证RSS是否能被系统正确处理。以 JSON　展示，超长部分被截取。</p></div>
+{% if error %}
+<div class="alert alert-danger" role="alert">
+  <p>预览出错。</p>
+</div>
+{% else %}
+{{ feed|safe }}
+
+
+{% endif %}
+
+<h2 class="sub-header">说明</h2>
+
+<p>预览 RSS。</p>
+
+{% endblock container %}
+
+
+

@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block container %}
+
+<h1 class="page-header">知乎 RSS 生成器</h1>
+<h2 class="sub-header">输入收藏夹ID</h2>
+<div><p>
+<form class="form-inline" role="search" action="{% url 'home:zhihu' %}" method="post" target="_blank">
+ {% csrf_token %}
+    <div class="form-group">
+      <input type="text" class="form-control" placeholder="输入收藏夹ID" name="id">
+    </div>
+    <button type="submit" class="btn btn-default">打开</button>
+</form>
+</p></div>
+
+
+<h2 class="sub-header">说明</h2>
+
+<p>使用<a href="http://www.zhihu.com/people/waydetse"> @Wayde Tse </a>的<a href="https://pipes.yahoo.com/pipes/pipe.info?_id=2ce237471d3147beee230f6eedb2f65a"> Pipes </a> 修改。</p>
+
+{% endblock container %}
+
+
+

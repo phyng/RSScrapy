@@ -1,0 +1,84 @@
+{% load tags %}
+{% url 'home:index' as home %}
+{% url 'home:explorer' as explorer %}
+{% url 'home:preview' as preview %}
+{% url 'home:full' as full %}
+{% url 'home:weixin' as weixin %}
+{% url 'home:weibo' as weibo %}
+{% url 'home:zhihu' as zhihu %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>RSScrapy - RSS生成器</title>
+    <link rel="stylesheet" href="https://dn-play.qbox.me/bootstrap.min.css" >
+    <link rel="stylesheet" href="http://phyng.qiniudn.com/dashboard.css" type="text/css">
+  </head>
+
+  <body>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">RSScrapy - RSS生成器</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#">Settings</a></li>
+            <li><a href="#">Profile</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+        <h3>开始</h3>
+          <ul class="nav nav-sidebar">
+            <li class="{% active request home %}"><a href="{{ home }}">首页</a></li>
+            <li class="{% active request explorer %}"><a href="{{ explorer }}">浏览</a></li>
+            <li class="{% active request preview %}"><a href="{{ preview }}">RSS 预览工具</a></li>
+          </ul>
+        <h4>通用模版</h4>
+          <ul class="nav nav-sidebar">
+            <li class="{% active request full %}"><a href="{{ full }}">RSS 转全文</a></li>
+            <li><a href="/home/template/list">文章列表转 RSS</a></li>
+          </ul>
+        <h4>专用模版</h4>
+          <ul class="nav nav-sidebar">
+            <li class="{% active request weixin %}"><a href="{{ weixin }}">微信公众号</a></li>
+            <li class="{% active request weibo %}"><a href="{{ weibo }}">微博</a></li>
+            <li class="{% active request zhihu %}"><a href="{{ zhihu }}">知乎收藏夹</a></li>
+            <li><a href="/home/template/twitter">Twitter</a></li>
+          </ul>
+        </div>
+
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+
+
+        {% block container %}
+        {% endblock container %}
+
+
+        </div>
+
+      </div>
+    </div>
+
+
+    <script src="https://dn-play.qbox.me/jquery.min.js"></script>
+    <script src="https://dn-play.qbox.me/bootstrap.min.js"></script>
+
+  </body>
+</html>

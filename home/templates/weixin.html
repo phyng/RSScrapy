@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+
+{% block container %}
+
+<h1 class="page-header">微信公众号 RSS 生成器</h1>
+<h2 class="sub-header">搜索微信用户</h2>
+<div><p>
+<form class="form-inline" role="search" action="{% url 'home:weixin' %}" method="post">
+ {% csrf_token %}
+    <div class="form-group">
+      <input type="text" class="form-control" placeholder="输入微信名字" name="name">
+    </div>
+    <button type="submit" class="btn btn-default">搜索</button>
+</form>
+</p></div>
+{% if search_result %}
+<table class="table table-hover">
+<tr>
+<th>微信名字</th>
+<th>微信号</th>
+<th>是否认证</th>
+<th>RSS 链接</th>
+</tr>
+{% for user in search_result %}
+<tr>
+<td><strong> {{ user.name }}</strong></td>
+<td>{{ user.id }}</td>
+
+{% if user.v == "True" %}
+<td><span class="label label-success">认证</span></td>
+{% else %}
+<td>未认证</td>
+{% endif %}
+
+<td><a href="{% url 'home:weixin' %}?openid={{ user.openid }}" target="_blank">打开</a></td>
+</tr>
+{% endfor %}
+</table>
+
+{% endif %}
+
+<h2 class="sub-header">说明</h2>
+<ul>
+    <li>只能搜索名字，不能搜索微信号</li>
+    <li>处理越南文的时候似乎</li>
+</ul>
+
+{% endblock container %}
+
+
+

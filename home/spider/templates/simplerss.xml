@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0"
+    xmlns:content="http://purl.org/rss/1.0/modules/content/"
+    xmlns:dc="http://purl.org/dc/elements/1.1/"
+    xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+    >
+<channel>
+<title><![CDATA[{{ feed['title'] }}]]></title>
+<link><![CDATA[{{ feed['link'] }}]]></link>
+<description>{{ feed['description'] }}</description>
+<lastBuildDate>{{ feed['lastBuildDate'] }}</lastBuildDate>
+<language>{{ feed['language'] }}</language>
+
+<sy:updatePeriod>hourly</sy:updatePeriod>
+<sy:updateFrequency>1</sy:updateFrequency>
+<ttl>60</ttl>
+<generator>RSScrapy</generator>
+
+{% if feed['item'] %}
+{% for item in feed['item'] %}
+    <item>
+        <title><![CDATA[{{ item['title'] }}]]></title>
+        <link><![CDATA[{{ item['link'] }}]]></link>
+
+        <comments>{{ item['comments'] }}</comments>
+        <pubDate>{{ item['pubDate'] }}</pubDate>
+        <dc:creator><![CDATA[{{ item['creator'] }}]]></dc:creator>
+
+        {% if item['categorys'] %}
+        {% for category in item['categorys'] %}
+        <category><![CDATA[{{ category }}]]></category>
+        {% endfor %}
+        {% endif %}
+
+        <guid isPermaLink="false"><![CDATA[{{ item['guid'] }}]]></guid>
+        <description><![CDATA[{{ item['description'] }}]]></description>
+        <content:encoded><![CDATA[{{ item['content'] }}]]></content:encoded>
+    </item>
+{% endfor %}
+{% endif %}
+</channel>
+</rss>
