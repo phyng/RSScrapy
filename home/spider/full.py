@@ -49,8 +49,8 @@ def output(url, type_='ra', onlycontent=False, class_='', tag='', id_=''):
             results = pool.map(get_by_readability, urls)
             pool.close()
             pool.join()
-
-            for i in range(len(feed['item'][:10])):
+            feed['item'] = feed['item'][:10]
+            for i in range(len(feed['item'])):
                 feed['item'][i]['content'] = results[i]
             p.f.feed = feed
             return p.render()
@@ -66,9 +66,10 @@ def output(url, type_='ra', onlycontent=False, class_='', tag='', id_=''):
             results = pool.map(get_by_bs, li)
             pool.close()
             pool.join()
-
-            for i in range(len(feed['item'][:10])):
+            feed['item'] = feed['item'][:10]
+            for i in range(len(feed['item'])):
                 feed['item'][i]['content'] = results[i]
+            feed['item'] = feed['item'][:10]
             p.f.feed = feed
             return p.render()
 

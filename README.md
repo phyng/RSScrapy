@@ -8,3 +8,11 @@ RSS 生成器
 * 微信/微博/知乎
 
 ![Demo](demo.png)
+
+## 依赖
+
+Django
+lxml
+readability-lxml
+speedparser
+xmltodict
